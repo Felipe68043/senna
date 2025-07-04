@@ -1,0 +1,18 @@
+services:
+  # Define o serviço da nossa API
+  api:
+    # Instrui o Docker Compose a construir a imagem a partir do Dockerfile no diretório atual (.)
+    build: .
+    # Nome do contêiner para fácil identificação
+    container_name: imersao_devops_api
+    # Comando para executar a aplicação com hot-reload, ideal para desenvolvimento
+    command: uvicorn app:app --host 0.0.0.0 --port 8000 --reload
+    # Mapeia a porta 8000 do contêiner para a porta 8000 da sua máquina
+    ports:
+      - "8000:8000"
+    # Monta o diretório atual (.) no diretório /app do contêiner.
+    # Isso permite que o hot-reload funcione e que o banco de dados SQLite (escola.db)
+    # seja salvo na sua máquina, persistindo os dados.
+    volumes:
+      - .:/app
+
